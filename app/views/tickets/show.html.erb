@@ -4,6 +4,10 @@
   </header>
   <header>
     <h2><%= @ticket.name %></h2>
+
+    <ul>
+      <li><%= link_to "Edit Ticket", edit_project_ticket_path, class: "edit" %>
+    </ul>
   </header>
   <%= simple_format(@ticket.description) %>
 </div>
