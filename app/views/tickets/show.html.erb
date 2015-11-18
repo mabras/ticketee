@@ -6,7 +6,13 @@
     <h2><%= @ticket.name %></h2>
 
     <ul>
-      <li><%= link_to "Edit Ticket", edit_project_ticket_path, class: "edit" %>
+      <li>
+        <%= link_to "Edit Ticket", edit_project_ticket_path, class: "edit" %>
+      </li>
+
+      <li>
+        <%= link_to "Delete Ticket",[@project, @ticket], method: :delete, data: { confirm: "Are u sure u want to delete this ticket?"}, class: "delete" %>
+      </li>
     </ul>
   </header>
   <%= simple_format(@ticket.description) %>
