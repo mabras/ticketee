@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.feature "Users can create new projects" do
+  before do
+    login_as(FactoryGirl.create(:user, :admin))
+  end
+
   scenario "with a valid attributes" do
     visit "/"
 
