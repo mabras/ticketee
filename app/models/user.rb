@@ -6,4 +6,10 @@ class User < ActiveRecord::Base
   def to_s
     "#{email} (#{admin? ? "Admin" : "User"})"
   end
+
+  scope :excluding_archived, lambda { where(archived_at: nil) }
+
+  def archive
+    update(archived_at: Time.now)
+  end
 end
