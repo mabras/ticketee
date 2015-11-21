@@ -3,13 +3,20 @@
   <h1><%= @project.name %></h1>
 
   <ul class="actions">
-    <li><%= link_to "Edit Project", edit_project_path(@project), class: "edit" %></li>
+    <% if policy(@project).update? %>
+      <li>
+        <%= link_to "Edit Project", edit_project_path(@project), class: "edit" %>
+      </li>
+    <% end %>
+
     <% admin_only do %>
-      <li><%= link_to "Delete Project",
-                       admin_project_path(@project),
-                       method: :delete,
-                       data: { confirm: "Are r u sure u want to delete this project?" },
-                       class: "delete" %></li>
+      <li>
+        <%= link_to "Delete Project",
+                         admin_project_path(@project),
+                         method: :delete,
+                         data: { confirm: "Are r u sure u want to delete this project?" },
+                         class: "delete" %>
+      </li>
     <% end %>
   </ul>
 
