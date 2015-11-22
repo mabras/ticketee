@@ -34,13 +34,6 @@ class Admin::UsersController < Admin::ApplicationController
     User.transaction do
       @user.roles.clear
       build_roles_for(@user)
-      # role_data = params.fetch(:roles, [])
-      # role_data.each do |project_id, role_name|
-      #   if role_name.present?
-      #     @user.roles.build(project_id: project_id, role: role_name)
-      #   end
-      # end
-
       if @user.update(user_params)
         flash[:notice] = "User has been updated."
         redirect_to admin_users_path
