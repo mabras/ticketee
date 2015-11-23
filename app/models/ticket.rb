@@ -3,6 +3,6 @@ class Ticket < ActiveRecord::Base
   validates :description, presence: true, length: { minimum: 10 }
   belongs_to :project
   belongs_to :author, class_name: "User"
-
-  mount_uploader :attachment
+  has_many :attachments, dependent: :destroy
+  accepts_nested_attributes_for :attachments, reject_if: :all_blank
 end
