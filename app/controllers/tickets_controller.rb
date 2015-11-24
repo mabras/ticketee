@@ -24,6 +24,7 @@ class TicketsController < ApplicationController
 
   def show
     authorize @ticket, :show?
+    @comment = @ticket.comments.new
   end
 
   def edit

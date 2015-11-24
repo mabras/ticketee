@@ -8,7 +8,8 @@
     <ul class="actions">
       <% if policy(@ticket).update? %>
         <li>
-          <%= link_to "Edit Ticket", edit_project_ticket_path, class: "edit" %>
+          <%# <%= link_to "Edit Ticket", edit_project_ticket_path, class: "edit" %1> %>
+          <%= link_to "Edit Ticket", [:edit, @project, @ticket], class: "edit" %>
         </li>
       <% end %>
       <% if policy(@ticket).destroy? %>
@@ -46,3 +47,22 @@
     </div>
   <% end %>
 </div>
+
+<header>
+  <h3>
+    Comments
+  </h3>
+</header>
+
+<div id="comments">
+  <% if @ticket.comments.persisted.any? %>
+    <%= render @ticket.comments.persisted %>
+  <% else %>
+    <p>
+    There are no comments for this ticket.
+    </p>
+  <% end %>
+</div>
+<% if policy(@comment).create? %>
+  <%= render 'comments/form', ticket: @ticket, comment: @comment %>
+<% end %>
