@@ -2,7 +2,12 @@ class CommentsController < ApplicationController
   before_action :set_ticket
 
   def create
-    @comment = @ticket.comments.new(comment_params)
+    whitelisted_params = comment_params
+    unless policy(@ticket).change_state?
+      whitelisted_params.delete(:state_id)
+    end
+
+    @comment = @ticket.comments.new(whitelisted_params)
     @comment.author = current_user
     authorize @comment, :create?
 
