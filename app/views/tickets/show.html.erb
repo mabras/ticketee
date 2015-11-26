@@ -29,14 +29,18 @@
       <th>Created:</th>
       <td><%= time_ago_in_words(@ticket.created_at) %> ago</td>
     </tr>
-    <table id="attributes">
-       <% if @ticket.state.present? %>
-         <tr>
-           <th>State:</th>
-           <td><%= render @ticket.state %></td>
-         </tr>
-       <% end %>
-    </table>
+    <% if @ticket.state.present? %>
+      <tr>
+        <th>State:</th>
+        <td><%= render @ticket.state %></td>
+      </tr>
+    <% end %>
+    <% if @ticket.tags.any? %>
+      <tr id="tags">
+        <th>Tags:</th>
+        <td><%= render @ticket.tags %></td>
+      <tr>
+    <% end %>
   </table>
 
   <%= simple_format(@ticket.description) %>
