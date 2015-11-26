@@ -11,12 +11,15 @@ RSpec.feature "Users can create new tickets" do
     click_link "New Ticket"
   end
 
+  let!(:state) { FactoryGirl.create :state, name: 'New', default: true }
+
   scenario "with valid attribute" do
     fill_in "Name", with: "Non-Standards compliance"
     fill_in "Description", with: "My pages are ugly!"
     click_button "Create Ticket"
 
     expect(page).to have_content "Ticket has been created."
+    expect(page).to have_content 'State: New'
     within("#ticket") do
       expect(page).to have_content "Author: #{user.email}"
     end
