@@ -61,3 +61,4 @@ gem 'pundit', '1.0.1'
 
 gem 'carrierwave', '0.10.0'
 gem 'bullet', '4.14.10', :group => "development"
+gem "searcher", github: "radar/searcher"
