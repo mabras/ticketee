@@ -1,4 +1,8 @@
+require "heartbeat/application"
+
 Rails.application.routes.draw do
+
+  mount Heartbeat::Application, at: "/heartbeat"
 
   namespace :api do
     resources :projects, only: [] do
