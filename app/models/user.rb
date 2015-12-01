@@ -25,4 +25,8 @@ class User < ActiveRecord::Base
   def role_on(project)
     roles.find_by(project_id: project).try(:name)
   end
+
+  def generate_api_key
+    update_column(:api_key, SecureRandom.hex(16))
+  end
 end
