@@ -2,9 +2,14 @@ require "heartbeat/application"
 
 Rails.application.routes.draw do
 
+  mount Tolk::Engine => '/tolk', :as => 'tolk'
   mount Heartbeat::Application, at: "/heartbeat"
 
   namespace :api do
+    namespace :v2 do
+      mount API::V2::Tickets, at: "/projects/:project_id/tickets"
+    end
+
     resources :projects, only: [] do
       resources :tickets
     end

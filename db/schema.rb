@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130215251) do
+ActiveRecord::Schema.define(version: 20160219002320) do
 
   create_table "attachments", force: :cascade do |t|
     t.string   "file"
@@ -93,6 +93,32 @@ ActiveRecord::Schema.define(version: 20151130215251) do
   add_index "tickets", ["author_id"], name: "index_tickets_on_author_id"
   add_index "tickets", ["project_id"], name: "index_tickets_on_project_id"
   add_index "tickets", ["state_id"], name: "index_tickets_on_state_id"
+
+  create_table "tolk_locales", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tolk_locales", ["name"], name: "index_tolk_locales_on_name", unique: true
+
+  create_table "tolk_phrases", force: :cascade do |t|
+    t.text     "key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tolk_translations", force: :cascade do |t|
+    t.integer  "phrase_id"
+    t.integer  "locale_id"
+    t.text     "text"
+    t.text     "previous_text"
+    t.boolean  "primary_updated", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tolk_translations", ["phrase_id", "locale_id"], name: "index_tolk_translations_on_phrase_id_and_locale_id", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
